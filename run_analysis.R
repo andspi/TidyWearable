@@ -58,4 +58,10 @@ names(Mtrain_set)[grep("trainingLabel", names(Mtrain_set))] <- "activityLabel"
 ### merge
 mergedDataSet <- rbind(Mtrain_set,Mtest_set)
 
+mergedDataSet$activityLabel <- factor(mergedDataSet$activityLabel, levels = activity_labels[,1], labels = activity_labels[,2])
+
+## extraction of means and standard deviations
+library(dplyr)
+mergedDataSet_sd_mean <- select(mergedDataSet, 1:4, contains("mean()"),contains("std()"))
+
 
