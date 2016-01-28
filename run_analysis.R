@@ -8,7 +8,9 @@ descrURL <- "http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+U
 
 ### checks for the unpacked dataset and downloads it if not available
 if(!file.exists("UCI HAR Dataset")){
-  download.file(fileURL, "dataset.zip")
+  if(!file.exists("dataset.zip")){
+    download.file(fileURL, "dataset.zip")
+  }
   unzip("dataset.zip")
 }
 
@@ -52,7 +54,7 @@ names(Mtest_set)[grep("testId", names(Mtest_set))] <- "id"
 names(Mtest_set)[grep("testLabel", names(Mtest_set))] <- "activityLabel"
 
 Mtrain_set <- cbind(set = "train", Mtrain)
-names(Mtrain_set)[grep("testId", names(Mtrain_set))] <- "id"
+names(Mtrain_set)[grep("trainId", names(Mtrain_set))] <- "id"
 names(Mtrain_set)[grep("trainingLabel", names(Mtrain_set))] <- "activityLabel"
 
 ### merge
@@ -61,7 +63,22 @@ mergedDataSet <- rbind(Mtrain_set,Mtest_set)
 mergedDataSet$activityLabel <- factor(mergedDataSet$activityLabel, levels = activity_labels[,1], labels = activity_labels[,2])
 
 ## extraction of means and standard deviations
-library(dplyr)
+require(dplyr)
 mergedDataSet_sd_mean <- select(mergedDataSet, 1:4, contains("mean()"),contains("std()"))
+
+## cleaning variable names
+cleanNames <- gsub("[()]","", names(mergedDataSet_sd_mean))
+cleanNames <- gsub("^f","frequencyDomain-", cleanNames, perl = T)
+cleanNames <- gsub("^t","timeDomain-", cleanNames, perl = T)
+cleanNames <- gsub("std","StandardDeviation", cleanNames, perl = T)
+cleanNames <- gsub("mean","Mean", cleanNames, perl = T)
+cleanNames <- gsub("Mag","Magnitude", cleanNames, perl = T)
+cleanNames <- gsub("Gyro","Gyroscope", cleanNames, perl = T)
+cleanNames <- gsub("Acc","Acceleration", cleanNames, perl = T)
+mergedDataSet_sd_mean_cleaned <- mergedDataSet_sd_mean
+names(mergedDataSet_sd_mean_cleaned) <- cleanNames
+
+## export first tidy data file
+# write.csv(mergedDataSet_sd_mean_cleaned, file=".csv", row.names = F)
 
 

@@ -27,12 +27,16 @@ The needed data and respectively named tables are:
   + 2 tables contain catagory labels: 
     "activity_labels"
     "features"
-
+All other files (in the "Inertial Signals" folders) are ignored as they contain raw measurements and only the mean and standard diviation data are needed.
 3. The features list is now used to name the "X_..." table variables.
 4. The 6 data tables are then appended with explicit ids for each observation (instead of using the row number), so to allow merging within the two sets.
 5. The two sets of three are merged by this id.
 6. The column names of both tables are matched and a factor variable to identify the entries as belonging to either set ("train" or "test") is added.
 7. The sets are combined.
-8. The numeric activity lables are substituted by a descriptive factor through the category table. << end of merging >>
-9. The select function of the dplyr package is used to isolate
+8. The numeric activity lables are substituted by a descriptive factor through the category table. 
+9. The select function of the dplyr package is used to isolate the mean and standard deviation columns.
+10. The variable names are cleaned by removing all non-alphanumeric characters except for minus. (The course lecture instruced not to use underscores, periods, and whitespaces in variable Names so the minus sign and "camelCase" capitalization.) Abbreviations are substituted with the descriptive long version, according to the "README.txt" and "features_info.txt".
+11. 
+
+
 
