@@ -59,8 +59,8 @@ names(Mtrain_set)[grep("trainingLabel", names(Mtrain_set))] <- "activityLabel"
 
 ### merge
 mergedDataSet <- rbind(Mtrain_set,Mtest_set)
-
 mergedDataSet$activityLabel <- factor(mergedDataSet$activityLabel, levels = activity_labels[,1], labels = activity_labels[,2])
+mergedDataSet$SubjectID <- factor(mergedDataSet$subjectID)
 
 ## extraction of means and standard deviations
 require(dplyr)
@@ -79,6 +79,18 @@ mergedDataSet_sd_mean_cleaned <- mergedDataSet_sd_mean
 names(mergedDataSet_sd_mean_cleaned) <- cleanNames
 
 ## export first tidy data file
-# write.csv(mergedDataSet_sd_mean_cleaned, file=".csv", row.names = F)
+write.csv(mergedDataSet_sd_mean_cleaned, file="tidyWearable.csv", row.names = F)
 
+## derive reordered data set
+require(reshape2)
+meltedDataSet <- melt(mergedDataSet_sd_mean_cleaned[-(1:2)], id=1:2)
+meltedDataSet_grouped <- group_by(meltedDataSet, subjectID, activityLabel, variable)
+meltedDataSet_grouped_mean <- summarise(meltedDataSet_grouped, mean=mean(value))
+meltedDataSet_grouped_mean_recast <- dcast(meltedDataSet_grouped_mean, subjectID + activityLabel ~ variable, value.var = "mean")
+
+## edit names
+names(meltedDataSet_grouped_mean_recast)[-(1:2)] <- gsub("^","mean-", names(meltedDataSet_grouped_mean_recast)[-(1:2)], perl = T)
+
+## export second tidy data file
+write.csv(meltedDataSet_grouped_mean_recast, file="tidyWearableMeans.csv", row.names = F)
 

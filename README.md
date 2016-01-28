@@ -36,7 +36,8 @@ All other files (in the "Inertial Signals" folders) are ignored as they contain 
 8. The numeric activity lables are substituted by a descriptive factor through the category table. 
 9. The select function of the dplyr package is used to isolate the mean and standard deviation columns.
 10. The variable names are cleaned by removing all non-alphanumeric characters except for minus. (The course lecture instruced not to use underscores, periods, and whitespaces in variable Names so the minus sign and "camelCase" capitalization.) Abbreviations are substituted with the descriptive long version, according to the "README.txt" and "features_info.txt".
-11. 
-
-
-
+11. The resulting data set is exported to "tidyWearable.csv".
+12. For the second data set the table is melted into a new set with subject and activity as id variables. The variables denoting the classification and id are droped as irrelevant for the summarizing averages.
+13. The table is then grouped and summarized so to show the averages for all variables for all subjects and activities.
+14. The table is then expanded to be tidy again, with one variable per column.
+14. The resulting second data set is exported to "tidyWearableMeans.csv".
