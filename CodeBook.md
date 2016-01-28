@@ -3,7 +3,7 @@
 ## Raw data
 The raw data used for this project are measures and derived variables on human movements obtained with smartphone sensors.
 
-The researchers (Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto. Smartlab - Non Linear Complex Systems Laboratory. DITEN - University degli Studi di Genova. activityrecognition@smartlab.ws) provide the data set online at:
+The researchers (Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto. Smartlab - Non Linear Complex Systems Laboratory. DITEN - University degli Studi di Genova. activityrecognition@smartlab.ws) provide the data set online. It was downloaded from a mirror at:
 (https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
 
 They oriinal README.txt describes the data as:
@@ -20,6 +20,22 @@ The features are described in the original "features_info.txt":
 
 > These signals were used to estimate variables of the feature vector for each pattern:  
 '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+
+## Variables 
+### Identifiers
+Both tidy data sets:
++ "subjectID" ... identifies the subject (n=30) who performed the activity for each observation
++ "activityLabel" ... identifies the activity (n=6, see above) performed for each observation
+
+Only first data set:
++ "set" ... identifies wheter the observation belongs to the "test"" or "training"" data set
++ "id" ... is a unique identifier _within_ each of the sets.
+
+### Measurements
++ "mean-..." ... report the mean value of all observations for the respective variable for each activity and each subject
+
+All other variable conform to the original details above. Abbreviations have been translated to long form according to instructions.
+
 
 ## Transformation
 The steps taken in the "run_analysis.R" script are:
@@ -51,16 +67,3 @@ All other files (in the "Inertial Signals" folders) are ignored as they contain 
 13. The table is then grouped and summarized so to show the averages for all variables for all subjects and activities.
 14. The table is then expanded to be tidy again, with one variable per column.
 15. The resulting second data set is exported to "tidyWearableMeans.csv".
-
-## Variables 
-
-### Identifiers
-+ "set" ... identifies wheter the observation belongs to the "test"" or "training"" data set
-+ "id" ... is a unique identifier _within_ each of the sets.
-+ "subjectID" ... identifies the subject (n=30) who performed the activity for each observation
-+ "activityLabel" ... identifies the activity (n=6, see above) performed for each observation
-
-### Measurements
-+ "mean-..." ... report the mean value of all observations for the respective variable for each activity and each subject
-
-All other variable conform to the original details above, although abreviations have been extended according to instructions.
