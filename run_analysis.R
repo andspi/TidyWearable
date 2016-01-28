@@ -93,4 +93,4 @@ names(meltedDataSet_grouped_mean_recast)[-(1:2)] <- gsub("^","mean-", names(melt
 
 ## export second tidy data file
 write.csv(meltedDataSet_grouped_mean_recast, file="tidyWearableMeans.csv", row.names = F)
-
+write.table(meltedDataSet_grouped_mean_recast, file= "tidydata.txt", row.name=FALSE)

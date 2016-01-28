@@ -67,3 +67,4 @@ All other files (in the "Inertial Signals" folders) are ignored as they contain 
 13. The table is then grouped and summarized so to show the averages for all variables for all subjects and activities.
 14. The table is then expanded to be tidy again, with one variable per column.
 15. The resulting second data set is exported to "tidyWearableMeans.csv".
+16. The table is exported as a txt file created with write.table() using row.name=FALSE (per upload prompt) as "tidydata.txt"

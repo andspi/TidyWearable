@@ -11,3 +11,4 @@ This Project includes the following files:
 + Codebook.md - a description of the data, building on the original infos, and the manipulations performed by the "run_analysis.R" script
 + tidyWearable.csv - first result. tidied data set of all averages and standard deviations collected in the orinial data
 + tidyWearableMeans.csv - second result. same as above but with the average of each variable for each activity and each subject
++ tidydata.txt - Final Result! The same second table, but exported in the manner that was prompted only at the upload box, which apparently no one cared to write in the instructions, although that would have been so obvious to do.
